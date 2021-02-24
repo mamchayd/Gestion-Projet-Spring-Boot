@@ -1,4 +1,7 @@
 package org.enset.gestionprojet.model;
 
-public class Status {
+public enum Status {
+    NOTSTART,
+    INPROGRESS,
+    FINICHED
 }
