@@ -27,6 +27,9 @@ public class Task {
 
     private double duree;
 
+    @Enumerated(EnumType.ORDINAL)
+    private Status status;
+
     @ManyToOne
     @JsonIgnore
     private Responsable responsable;

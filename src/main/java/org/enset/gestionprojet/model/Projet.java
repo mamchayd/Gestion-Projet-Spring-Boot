@@ -20,6 +20,7 @@ public class Projet {
     private Long id;
     private String titre;
     private String description;
+    private boolean isArchive=false;
 
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date dateCreation;
@@ -27,6 +28,9 @@ public class Projet {
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date dateDebut;
     private double duree;
+
+    @Enumerated(EnumType.ORDINAL)
+    private Status status;
 
     @ManyToOne
     @JsonIgnore
