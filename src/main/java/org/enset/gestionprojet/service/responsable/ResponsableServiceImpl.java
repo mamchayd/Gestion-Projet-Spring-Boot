@@ -15,10 +15,10 @@ public class ResponsableServiceImpl implements IResponsableService{
     private ResponsableRepository responsableRepository;
 
     @Override
-    public void addResponsable(Responsable responsable) {
+    public Responsable addResponsable(Responsable responsable) {
 
-        responsableRepository.save(responsable);
-
+        Responsable s=responsableRepository.save(responsable);
+        return s;
     }
 
     @Override
@@ -27,18 +27,24 @@ public class ResponsableServiceImpl implements IResponsableService{
     }
 
     @Override
-    public Responsable editResponsable(Long id, Responsable responsable) {
+    public Responsable editResponsable(Long id,Responsable responsable) {
         Responsable r=responsableRepository.findById(id).get();
-        r.setNom(responsable.getEmail());
+        r.setNom(responsable.getNom());
         r.setPrenom(responsable.getPrenom());
-        r.setEmail(responsable.getEmail());
-        responsableRepository.save(r);
-        return r;
+        r.setTel(responsable.getTel());
+
+        return responsableRepository.save(r);
     }
 
     @Override
     public void deleteResponsable(Long id) {
         Responsable r=responsableRepository.findById(id).get();
         responsableRepository.delete(r);
+    }
+
+    @Override
+    public Responsable getOne(Long id) {
+        Responsable r= responsableRepository.findById(id).get();
+        return r;
     }
 }

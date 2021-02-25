@@ -7,9 +7,10 @@ import java.util.List;
 
 public interface IResponsableService {
 
-    public void addResponsable(Responsable responsable);
+    public Responsable addResponsable(Responsable responsable);
     public List<Responsable> responsables ();
-    public Responsable editResponsable(Long id, Responsable responsable);
+    public Responsable editResponsable(Long id,Responsable responsable);
     public void deleteResponsable(Long id);
+    public Responsable getOne(Long id);
 
 }

@@ -23,5 +23,5 @@ public class Responsable {
     @OneToMany(mappedBy = "responsable",cascade = CascadeType.ALL)
     private List<Task> tasks;
     @OneToMany(mappedBy = "responsable",cascade = CascadeType.ALL)
-    private List<Projet> projects;
+    private List<Projet> projets;
 }
