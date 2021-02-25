@@ -44,7 +44,9 @@ public class ResponsableServiceImpl implements IResponsableService{
 
     @Override
     public Responsable getOne(Long id) {
+        System.out.println("---------------getOne-------- "+id);
         Responsable r= responsableRepository.findById(id).get();
+        System.out.println("---------------getOne-------- "+r.getNom());
         return r;
     }
 }

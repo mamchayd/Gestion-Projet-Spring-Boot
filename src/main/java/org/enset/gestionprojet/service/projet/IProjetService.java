@@ -11,10 +11,13 @@ public interface IProjetService {
     /**
      * @param projet Projet
      */
-    public void addProjet(Projet projet);
-    public Projet editProjet(Projet projet);
-    public void archive(Projet p);
-    public void affecterProjet(Projet p, Responsable responsable);
+    public Projet addProjet(Projet projet);
+    public Projet editProjet(Long id,Projet projet);
+    public void archive(Long id);
+    public void affecterProjet(Long id, Responsable responsable);
     public List<Projet> listProjetArchive();
+    public List<Projet> listProjet();
+    public Projet getOne(Long id);
+
 
 }

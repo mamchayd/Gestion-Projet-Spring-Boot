@@ -1,5 +1,6 @@
 package org.enset.gestionprojet.controller;
 
+import org.enset.gestionprojet.configuration.Config;
 import org.enset.gestionprojet.model.Responsable;
 import org.enset.gestionprojet.pojo.ResponsableDTO;
 import org.enset.gestionprojet.repositories.ResponsableRepository;
@@ -21,7 +22,7 @@ public class ResponsableController {
     ResponsableServiceImpl responsableService;
 
     @Autowired
-    private ModelMapper modelMapper;
+    Config configuration;
 
     @GetMapping("/all")
     public List<ResponsableDTO> getAll(){
@@ -50,10 +51,6 @@ public class ResponsableController {
     }
 
 
-    @Bean
-    public ModelMapper modelMapper() {
-        return new ModelMapper();
-    }
 
     /**
      * Convert entity to DTO
@@ -61,7 +58,7 @@ public class ResponsableController {
      * @return
      */
     private ResponsableDTO convertToDto(Responsable responsable) {
-        ResponsableDTO responsableDTO = modelMapper.map(responsable, ResponsableDTO.class);
+        ResponsableDTO responsableDTO = configuration.modelMapper().map(responsable, ResponsableDTO.class);
         responsableDTO.setEmail(responsable.getEmail());
         responsableDTO.setPrenom(responsable.getPrenom());
         responsableDTO.setNom(responsable.getNom());
@@ -75,7 +72,7 @@ public class ResponsableController {
      * @return
      */
     private Responsable convertToEntity(ResponsableDTO responsableDTO){
-        Responsable responsable=modelMapper.map(responsableDTO,Responsable.class);
+        Responsable responsable=configuration.modelMapper().map(responsableDTO,Responsable.class);
         if(responsableDTO.getId()!=null){
             Responsable oldResp=responsableService.getOne(responsableDTO.getId());
             responsable.setEmail(oldResp.getEmail());

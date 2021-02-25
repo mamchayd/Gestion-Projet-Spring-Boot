@@ -36,4 +36,7 @@ public class Projet {
     @JsonIgnore
     private Responsable responsable;
 
+    public Responsable getResponsable() {
+        return responsable;
+    }
 }

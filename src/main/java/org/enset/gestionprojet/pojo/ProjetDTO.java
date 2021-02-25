@@ -1,6 +1,7 @@
 package org.enset.gestionprojet.pojo;
 
 import lombok.Data;
+import org.enset.gestionprojet.model.Status;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,6 +18,7 @@ public class ProjetDTO {
     private Date dateDebut;
     private double duree;
     private ResponsableDTO responsable;
+    public Status status;
     private boolean isArchive=false;
 
 }
