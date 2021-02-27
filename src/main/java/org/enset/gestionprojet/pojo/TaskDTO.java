@@ -1,7 +1,7 @@
 package org.enset.gestionprojet.pojo;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+import org.enset.gestionprojet.model.Status;
 
 import java.util.Date;
 
@@ -9,10 +9,13 @@ import java.util.Date;
 public class TaskDTO {
     private Long id;
     private String titre;
-    private String decription;
+    private String description;
     private Date dateDebut;
-    private Date datecreation;
     private double duree;
     private ResponsableDTO responsable;
+    private ProjetDTO projetDTO;
+    public Status status;
+
 
 }
+

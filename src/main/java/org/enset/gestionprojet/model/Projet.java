@@ -8,7 +8,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Data
@@ -36,7 +38,11 @@ public class Projet {
     @JsonIgnore
     private Responsable responsable;
 
-    public Responsable getResponsable() {
-        return responsable;
+    @OneToMany(mappedBy = "projet",cascade = CascadeType.ALL)
+    public List<Task> tasks;
+
+
+    public void addTask(Task task){
+        this.tasks.add(task);
     }
 }

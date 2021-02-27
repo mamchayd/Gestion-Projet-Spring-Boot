@@ -17,13 +17,13 @@ public class Task {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String titre;
-    private String decription;
+    private String description;
 
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date dateDebut;
 
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    private Date datecreation;
+    private Date dateCreation;
 
     private double duree;
 
@@ -33,5 +33,11 @@ public class Task {
     @ManyToOne
     @JsonIgnore
     private Responsable responsable;
+
+    @ManyToOne
+    @JsonIgnore
+    private Projet projet;
+
+
 
 }

@@ -1,7 +1,10 @@
 package org.enset.gestionprojet.controller;
 
-import org.enset.gestionprojet.configuration.Config;
+
+import org.enset.gestionprojet.configuration.ObjectMapperUtils;
+import org.enset.gestionprojet.model.Projet;
 import org.enset.gestionprojet.model.Responsable;
+import org.enset.gestionprojet.pojo.ProjetDTO;
 import org.enset.gestionprojet.pojo.ResponsableDTO;
 import org.enset.gestionprojet.repositories.ResponsableRepository;
 import org.enset.gestionprojet.service.responsable.ResponsableServiceImpl;
@@ -21,16 +24,15 @@ public class ResponsableController {
     @Autowired
     ResponsableServiceImpl responsableService;
 
-    @Autowired
-    Config configuration;
+
+
 
     @GetMapping("/all")
-    public List<ResponsableDTO> getAll(){
+    public List<ResponsableDTO> listProjet(){
         List<Responsable> responsables=responsableService.responsables();
-        return responsables.stream().map(this::convertToDto)
-                .collect(Collectors.toList());
+        return ObjectMapperUtils.mapAll(responsables,ResponsableDTO.class);
     }
-
+/*
     @PostMapping("/ajouter")
     public ResponsableDTO ajouterResponsable(@RequestBody ResponsableDTO responsableDTO){
         Responsable responsable=convertToEntity(responsableDTO);
@@ -50,40 +52,8 @@ public class ResponsableController {
         responsableService.deleteResponsable(id);
     }
 
+ */
 
-
-    /**
-     * Convert entity to DTO
-     * @param responsable
-     * @return
-     */
-    private ResponsableDTO convertToDto(Responsable responsable) {
-        ResponsableDTO responsableDTO = configuration.modelMapper().map(responsable, ResponsableDTO.class);
-        responsableDTO.setEmail(responsable.getEmail());
-        responsableDTO.setPrenom(responsable.getPrenom());
-        responsableDTO.setNom(responsable.getNom());
-        responsableDTO.setTel(responsable.getTel());
-        return responsableDTO;
-    }
-
-    /**
-     * Convert DTO to entity
-     * @param responsableDTO
-     * @return
-     */
-    private Responsable convertToEntity(ResponsableDTO responsableDTO){
-        Responsable responsable=configuration.modelMapper().map(responsableDTO,Responsable.class);
-        if(responsableDTO.getId()!=null){
-            Responsable oldResp=responsableService.getOne(responsableDTO.getId());
-            responsable.setEmail(oldResp.getEmail());
-            responsable.setPrenom(oldResp.getPrenom());
-            responsable.setNom(oldResp.getNom());
-            responsable.setTasks(oldResp.getTasks());
-            responsable.setTel(oldResp.getTel());
-            responsable.setProjets(oldResp.getProjets());
-        }
-        return responsable;
-    }
 
 
 }

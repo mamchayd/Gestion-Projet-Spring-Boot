@@ -2,11 +2,14 @@ package org.enset.gestionprojet.service.projet;
 
 import org.enset.gestionprojet.model.Projet;
 import org.enset.gestionprojet.model.Responsable;
+import org.enset.gestionprojet.model.Task;
 import org.enset.gestionprojet.repositories.ProjetRepository;
 import org.enset.gestionprojet.repositories.ResponsableRepository;
+import org.enset.gestionprojet.service.task.TaskServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -16,11 +19,12 @@ public class ProjetServiceImpl implements IProjetService{
     ProjetRepository projetRepository;
     @Autowired
     ResponsableRepository responsableRepository;
+    @Autowired
+    TaskServiceImpl taskService;
 
 
     @Override
     public Projet addProjet(Projet projet) {
-    //    Responsable r=responsableRepository.findById(projet.getResponsable().getId()).get();
         Projet p=projetRepository.save(projet);
         return p;
     }
@@ -33,6 +37,7 @@ public class ProjetServiceImpl implements IProjetService{
         p.setTitre(projet.getTitre());
         p.setStatus(projet.getStatus());
         p.setResponsable(projet.getResponsable());
+        p.setTasks(projet.getTasks());
         projetRepository.save(p);
         return p;
     }
@@ -49,6 +54,15 @@ public class ProjetServiceImpl implements IProjetService{
         Projet p=projetRepository.findById(id).get();
         p.setResponsable(responsable);
         projetRepository.save(p);
+
+    }
+
+    @Override
+    public void ajouterTAskToProjet(Long id, Task task) {
+        Projet p=projetRepository.findById(id).get();
+        task.setProjet(p);
+        p.addTask(task);
+        projetRepository.save(p);
     }
 
     @Override
@@ -63,8 +77,7 @@ public class ProjetServiceImpl implements IProjetService{
 
     @Override
     public Projet getOne(Long id) {
-        Projet p=projetRepository.findById(id).get();
-        return p;
+        return projetRepository.findById(id).get();
     }
 
 
